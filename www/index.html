@@ -188,14 +188,15 @@
         import { Filesystem, Directory }
             from '@capacitor/filesystem';
 
-        import BackgroundGeolocation
-            from '@transistorsoft/capacitor-background-geolocation';
+        /*    import BackgroundGeolocation
+                from '@transistorsoft/capacitor-background-geolocation'; */
 
         window.Filesystem = Filesystem;
         window.Directory = Directory;
 
-        window.BackgroundGeolocation =
-            BackgroundGeolocation;
+        /*    window.BackgroundGeolocation =
+                BackgroundGeolocation; */
+
 
     </script>
     <script>
@@ -611,13 +612,24 @@ ${log.longitude}
                 const bg =
                     window.Capacitor.Plugins.BackgroundGeolocation;
 
-                console.log("BG Plugin:", bg);
+                alert("①取得成功");
 
-                alert("bg=" + typeof bg);
+                const state = await bg.ready({
+                    desiredAccuracy: 0
+                });
+
+                alert("②READY成功");
+
+                alert(JSON.stringify(state));
 
             } catch (e) {
 
-                alert("ERROR:" + e);
+                alert(
+                    "ERROR="
+                    + JSON.stringify(e)
+                );
+
+                console.error(e);
 
             }
 
