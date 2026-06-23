@@ -609,25 +609,31 @@ ${log.longitude}
 
             try {
 
-                const bg =
-                    window.Capacitor.Plugins.BackgroundGeolocation;
+                const bg = window.BackgroundGeolocation;
 
                 alert("①取得成功");
 
+                alert("ready=" + typeof bg.ready);
+
                 const state = await bg.ready({
-                    desiredAccuracy: 0
+
+                    desiredAccuracy: bg.DESIRED_ACCURACY_HIGH,
+
+                    distanceFilter: 200,
+
+                    stopOnTerminate: false,
+
+                    startOnBoot: true
+
                 });
 
                 alert("②READY成功");
 
-                alert(JSON.stringify(state));
+                console.log(state);
 
             } catch (e) {
 
-                alert(
-                    "ERROR="
-                    + JSON.stringify(e)
-                );
+                alert("ERROR=" + e);
 
                 console.error(e);
 
